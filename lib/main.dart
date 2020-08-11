@@ -78,7 +78,7 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  void _getUser() {
+  void _getUser() async {
     UserRepository repository = sl.get();
     UserDAO userDAO = sl.get<UserDAO>();
     final user = repository.getUser();
@@ -86,5 +86,7 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {
       _user = user;
     });
+    final list = await userDAO.getAllCondition();
+    print("AAAAAA ======> ${list.length}");
   }
 }

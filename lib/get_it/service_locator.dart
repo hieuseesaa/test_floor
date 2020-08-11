@@ -18,7 +18,7 @@ class ServiceLocator {
 
   static _registerDatabase() async {
     AppDatabase database =
-        await $FloorAppDatabase.databaseBuilder('test.db').build();
-    sl.registerLazySingletonAsync(() async => database.userDao);
+    await $FloorAppDatabase.databaseBuilder('test.db').build();
+    sl.registerLazySingleton(() => database.userDao);
   }
 }
