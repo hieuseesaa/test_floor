@@ -47,6 +47,12 @@ class _MyHomePageState extends State<MyHomePage> {
   User _user = User.init();
 
   @override
+  void initState() {
+    super.initState();
+    _getUser();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -77,16 +83,12 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
   }
-
+  UserRepository repository = sl.get();
   void _getUser() async {
-    UserRepository repository = sl.get();
-    UserDAO userDAO = sl.get<UserDAO>();
     final user = repository.getUser();
-    userDAO.insertUser(user.toUserEntity());
+    repository.insert(user);
     setState(() {
       _user = user;
     });
-    final list = await userDAO.getAllCondition();
-    print("AAAAAA ======> ${list.length}");
   }
 }
